@@ -1,0 +1,23 @@
+{
+  "name": "gatsby-transformer-unified",
+  "version": "0.0.1",
+  "description": "Gatsby v5 transformer for unified.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "rehype-stringify": "^10.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "unified": "^11.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "gatsby": "^5.13.3",
+    "typescript": "^5.3.3"
+  }
+}
