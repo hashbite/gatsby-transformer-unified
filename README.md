@@ -18,7 +18,7 @@
 ### Installation
 
 ```bash
-npm install gatsby-transformer-unified
+npm install gatsby-transformer-unified unified
 ```
 
 ### Configuration
