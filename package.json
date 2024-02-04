@@ -25,5 +25,8 @@
     "gatsby": "^5.13.3",
     "semantic-release": "^23.0.0",
     "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "unified": "^11.0.4"
   }
 }
