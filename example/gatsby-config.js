@@ -3,6 +3,7 @@
  *
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
+const { cachedImport } = require("gatsby-transformer-unified")
 
 /**
  * @type {import('gatsby').GatsbyConfig}
@@ -54,11 +55,25 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark'
+      resolve: "gatsby-transformer-remark",
     },
     {
-      //resolve: require.resolve(`../`), // Adjust the path according to your directory structure
-      resolve: 'gatsby-transformer-unified'
+      resolve: "gatsby-transformer-unified",
+      options: {
+        processors: {
+          markdownToHtml: async () => {
+            const { unified } = await cachedImport("unified")
+            const parse = await cachedImport("remark-parse")
+            const remark2rehype = await cachedImport("remark-rehype")
+            const stringify = await cachedImport("rehype-stringify")
+
+            return unified()
+              .use(parse.default)
+              .use(remark2rehype.default)
+              .use(stringify.default)
+          },
+        },
+      },
     },
   ],
 }

@@ -1,2 +1,2 @@
 // noop
-export default {}
+export { cachedImport } from "./utils";
