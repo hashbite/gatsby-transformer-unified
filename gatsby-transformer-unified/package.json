@@ -16,7 +16,11 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "",
+  "author": "Benedikt Rötsch <opensource@hashbite.net>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashbite/gatsby-transformer-unified.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "gatsby": "^5.13.3"
