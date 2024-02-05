@@ -32,6 +32,9 @@ module.exports = {
   plugins: [
     {
       resolve: "gatsby-transformer-unified",
+      /**
+       * @type {import('gatsby-transformer-unified').UnifiedPluginOptions}
+       */
       options: {
         processors: {
           markdownToHtml: async ({ cachedImport }) => {

@@ -8,12 +8,12 @@ import type { Processor } from "unified" with {
   "resolution-mode": "require"
 }
 
-type UnifiedGetSource = (
+export type UnifiedGetSource = (
   source: Node,
   loadNodeContent: CreateResolversArgs["loadNodeContent"]
 ) => Promise<string> | string;
 
-interface UnifiedPluginOptions extends PluginOptions {
+export interface UnifiedPluginOptions extends PluginOptions {
   processors: {
     [key: string]: () => Promise<Processor>;
   };
@@ -30,7 +30,7 @@ export const onPreInit: GatsbyNode["onPreInit"] = async (
   }
 };
 
-const defaultPluginOptions: Partial<UnifiedPluginOptions> = {
+export const defaultPluginOptions: Partial<UnifiedPluginOptions> = {
   nodeTypes: [
     ["MarkdownRemark", (source) => source.internal.content || ""],
     ["ContentfulMarkdown", (source: any) => source.raw || ""],
@@ -125,7 +125,7 @@ export const createResolvers: GatsbyNode["createResolvers"] = async (
     };
 
     // Assign the resolver function to supported node types
-    for (const nodeType in nodeTypeMap.keys()) {
+    for (const nodeType of nodeTypeMap.keys()) {
       resolvers[nodeType] = {
         ...resolvers[nodeType],
         [key]: {

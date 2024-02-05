@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
-const { cachedImport } = require("gatsby-transformer-unified")
+const { cachedImport, defaultPluginOptions } = require("gatsby-transformer-unified")
 
 /**
  * @type {import('gatsby').GatsbyConfig}
@@ -59,6 +59,9 @@ module.exports = {
     },
     {
       resolve: "gatsby-transformer-unified",
+      /**
+       * @type {import('gatsby-transformer-unified').UnifiedPluginOptions}
+       */
       options: {
         processors: {
           markdownToHtml: async () => {
@@ -73,6 +76,10 @@ module.exports = {
               .use(stringify.default)
           },
         },
+        nodeTypes: [
+          ...defaultPluginOptions.nodeTypes,
+          ["contentfulTextLongMarkdownTextNode", (source) => source.internal.content],
+        ],
       },
     },
   ],
