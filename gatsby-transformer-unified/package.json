@@ -1,6 +1,6 @@
 {
   "name": "gatsby-transformer-unified",
-  "version": "0.0.1-canary.5",
+  "version": "0.0.1-canary.6",
   "description": "Gatsby v5 transformer for unified.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,14 +25,13 @@
   "contributors": [
     {
       "name": "Benedikt Rötsch",
-      "email": "benedikt@hashbite.net",
-      "url": "https://twitter.com/axe312ger"
+      "email": "benedikt@hashbite.net"
     }
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hashbite/gatsby-transformer-unified",
-    "directory": "packages/core"
+    "directory": "gatsby-transformer-unified"
   },
   "license": "MIT",
   "devDependencies": {

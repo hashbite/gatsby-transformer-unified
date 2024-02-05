@@ -5757,7 +5757,7 @@ gatsby-transformer-sharp@^5.13.1:
     sharp "^0.32.6"
 
 gatsby-transformer-unified@^0.0.1-canary.1, "gatsby-transformer-unified@file:/Users/bene/dev/opensource/gatsby-transformer-unified/gatsby-transformer-unified":
-  version "0.0.1-canary.5"
+  version "0.0.1-canary.6"
   resolved "file:gatsby-transformer-unified"
 
 gatsby-worker@^2.13.1:
