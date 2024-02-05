@@ -13,6 +13,7 @@
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-remark": "^6.13.1",
     "gatsby-transformer-sharp": "^5.13.1",
+    "gatsby-transformer-unified": "file:..",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-stringify": "^10.0.0",
