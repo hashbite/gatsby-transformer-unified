@@ -1,24 +1,7 @@
-import type {
-  GatsbyNode,
-  Node,
-  PluginOptions,
-  CreateResolversArgs,
-} from "gatsby";
-import type { Processor } from "unified" with {
-  "resolution-mode": "require"
-}
+import type { GatsbyNode, Node } from "gatsby";
 
-export type UnifiedGetSource = (
-  source: Node,
-  loadNodeContent: CreateResolversArgs["loadNodeContent"]
-) => Promise<string> | string;
-
-export interface UnifiedPluginOptions extends PluginOptions {
-  processors: {
-    [key: string]: () => Promise<Processor>;
-  };
-  nodeTypes: [string, UnifiedGetSource][];
-}
+import { defaultPluginOptions } from "./config";
+import { UnifiedPluginOptions } from "./types";
 
 export const onPreInit: GatsbyNode["onPreInit"] = async (
   { reporter },
@@ -28,14 +11,6 @@ export const onPreInit: GatsbyNode["onPreInit"] = async (
     reporter.warn("No processors defined for gatsby-transformer-unified");
     return;
   }
-};
-
-export const defaultPluginOptions: Partial<UnifiedPluginOptions> = {
-  nodeTypes: [
-    ["MarkdownRemark", (source) => source.internal.content || ""],
-    ["ContentfulMarkdown", (source: any) => source.raw || ""],
-    ["File", (source, loadNodeContent) => loadNodeContent(source)],
-  ],
 };
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =

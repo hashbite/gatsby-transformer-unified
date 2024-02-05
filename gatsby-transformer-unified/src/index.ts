@@ -1,8 +1,5 @@
-// noop
-export {
-  UnifiedGetSource,
-  UnifiedPluginOptions,
-  defaultPluginOptions,
-} from "./gatsby-node";
+export type { UnifiedGetSource, UnifiedPluginOptions } from "./types";
+
+export { defaultPluginOptions } from "./config";
 
 export { cachedImport } from "./utils";
