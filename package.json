@@ -1,28 +1,14 @@
 {
-  "name": "gatsby-transformer-unified",
-  "version": "0.0.1-canary.1",
-  "description": "Gatsby v5 transformer for unified.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "prepare": "npm run build"
-  },
-  "files": [
-    "dist/",
-    "gatsby-node.js",
-    "README.md",
-    "LICENSE"
-  ],
-  "author": "",
+  "name": "gatsby-transformer-unified-monorepo",
+  "version": "0.0.0",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "gatsby-transformer-unified",
+    "example"
+  ],
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "gatsby": "^5.13.3",
+    "@types/node": "^18.0.0",
     "typescript": "^5.3.3"
-  },
-  "peerDependencies": {
-    "unified": "^11.0.4"
   }
 }
