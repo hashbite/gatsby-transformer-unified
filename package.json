@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "cd gatsby-transformer-unified && npm run build && cd ../example && npm run build"
+  },
   "workspaces": [
     "gatsby-transformer-unified",
     "example"
