@@ -92,10 +92,10 @@ export const createResolvers: GatsbyNode["createResolvers"] = async (
         try {
           content = await getSource(source, loadNodeContent);
         } catch (error) {
-          console.error(
-            `Error processing content with Unified in ${key}:`,
-            error
+          console.log(
+            `Error loading content in ${key} at ${source.internal.type}:`
           );
+          console.error(error);
           throw new Error(
             `Failed to load content in ${key} at ${source.internal.type}. See console for details.`
           );
@@ -106,10 +106,8 @@ export const createResolvers: GatsbyNode["createResolvers"] = async (
           const result = await processor.process(content);
           return { content: result.toString(), data: result.data };
         } catch (error) {
-          console.error(
-            `Error processing content with Unified in ${key}:`,
-            error
-          );
+          console.log(`Error processing content with Unified in ${key}:`);
+          console.error(error);
           throw new Error(
             `Failed to process content in ${key}. See console for details.`
           );
