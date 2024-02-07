@@ -22,7 +22,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     const { createTypes } = actions;
 
     const typeDefs = [
-      `interface UnifiedTransformableResult @dontInfer {`,
+      `type UnifiedTransformableResult @dontInfer {`,
       `  content: String`,
       `  data: JSON`,
       `}`,
