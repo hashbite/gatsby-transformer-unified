@@ -13,31 +13,36 @@ export const onPreInit: GatsbyNode["onPreInit"] = async (
   }
 };
 
-export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = (
-  { actions },
-  userPluginOptions: IUnifiedPluginOptions
-) => {
-  const pluginOptions = {
-    ...defaultPluginOptions,
-    ...userPluginOptions,
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }, userPluginOptions: IUnifiedPluginOptions) => {
+    const pluginOptions = {
+      ...defaultPluginOptions,
+      ...userPluginOptions,
+    };
+    const { createTypes } = actions;
+
+    const typeDefs = [
+      `interface UnifiedTransformableResult @dontInfer {`,
+      `  content: String`,
+      `  data: JSON`,
+      `}`,
+    ];
+
+    // Dynamically add fields for each processor
+    typeDefs.push(`interface UnifiedTransformable @nodeInterface {`);
+    for (const key of Object.keys(pluginOptions.processors)) {
+      typeDefs.push(`  ${key}: UnifiedTransformableResult`);
+    }
+    typeDefs.push(`}`);
+
+    pluginOptions.nodeTypes.forEach(([nodeType]) => {
+      typeDefs.push(
+        `type ${nodeType} implements Node & UnifiedTransformable @dontInfer`
+      );
+    });
+
+    createTypes(typeDefs.join("\n"));
   };
-  const { createTypes } = actions;
-
-  // Dynamically add fields for each processor
-  const typeDefs = [`interface UnifiedTransformable @nodeInterface {`];
-  for (const key of Object.keys(pluginOptions.processors)) {
-    typeDefs.push(`  ${key}: String`);
-  }
-  typeDefs.push(`}`);
-
-  pluginOptions.nodeTypes.forEach(([nodeType]) => {
-    typeDefs.push(
-      `type ${nodeType} implements Node & UnifiedTransformable @dontInfer`
-    );
-  });
-
-  createTypes(typeDefs.join("\n"));
-};
 
 export const createResolvers: GatsbyNode["createResolvers"] = async (
   { createResolvers, loadNodeContent },
@@ -89,7 +94,7 @@ export const createResolvers: GatsbyNode["createResolvers"] = async (
       // Process content with Unified
       try {
         const result = await processor.process(content);
-        return result.toString();
+        return { content: result.toString(), data: result.data };
       } catch (error) {
         console.error(
           `Error processing content with Unified in ${key}:`,
@@ -106,7 +111,7 @@ export const createResolvers: GatsbyNode["createResolvers"] = async (
       resolvers[nodeType] = {
         ...resolvers[nodeType],
         [key]: {
-          type: "String",
+          type: "UnifiedTransformableResult",
           resolve: resolveContent,
         },
       };

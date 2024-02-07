@@ -30,10 +30,18 @@ const ExampleFileSystemPage: React.FC<ExampleFileSystemPageProps> = (props) => {
       </h1>
       <p style={paragraphStyles}>Rendered content:</p>
       {props.data.file?.markdownToHtml && (
-        <div
-          style={paragraphStyles}
-          dangerouslySetInnerHTML={{ __html: props.data.file.markdownToHtml }}
-        />
+        <>
+          <div
+            style={paragraphStyles}
+            dangerouslySetInnerHTML={{
+              __html: props.data.file.markdownToHtml.content,
+            }}
+          />
+          <p style={paragraphStyles}>Extracted data:</p>
+          <pre>
+            <code>{props.data.file.markdownToHtml.data}</code>
+          </pre>
+        </>
       )}
     </main>
   );
@@ -46,7 +54,10 @@ export const Head: HeadFC = () => <title>Example: FileSystem</title>;
 export const pageQuery = graphql`
   query ExampleFileSystem {
     file(relativePath: { eq: "test.md" }) {
-      markdownToHtml
+      markdownToHtml {
+        content
+        data
+      }
     }
   }
 `;

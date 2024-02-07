@@ -30,10 +30,21 @@ const ExampleContentfulPage: React.FC<ExampleContentfulPageProps> = (props) => {
       </h1>
       <p style={paragraphStyles}>Rendered content:</p>
       {props.data.contentfulText?.longMarkdown?.markdownToHtml && (
-        <div
-          style={paragraphStyles}
-          dangerouslySetInnerHTML={{ __html: props.data.contentfulText.longMarkdown.markdownToHtml }}
-        />
+        <>
+          <div
+            style={paragraphStyles}
+            dangerouslySetInnerHTML={{
+              __html:
+                props.data.contentfulText.longMarkdown.markdownToHtml.content,
+            }}
+          />
+          <p style={paragraphStyles}>Extracted data:</p>
+          <pre>
+            <code>
+              {props.data.contentfulText.longMarkdown.markdownToHtml.data}
+            </code>
+          </pre>
+        </>
       )}
     </main>
   );
@@ -47,7 +58,10 @@ export const pageQuery = graphql`
   query ExampleContentful {
     contentfulText(contentful_id: { eq: "3pwKS9UWsYmOguo4UdE1EB" }) {
       longMarkdown {
-        markdownToHtml
+        markdownToHtml {
+          content
+          data
+        }
       }
     }
   }
