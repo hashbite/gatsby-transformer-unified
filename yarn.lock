@@ -5687,7 +5687,7 @@ gatsby-transformer-remark@^6.13.1:
     unified "^11.0.4"
 
 gatsby-transformer-unified@^0.0.1-canary.1, "gatsby-transformer-unified@file:/Users/bene/dev/opensource/gatsby-transformer-unified/gatsby-transformer-unified":
-  version "0.0.1-canary.8"
+  version "0.0.1-canary.9"
   resolved "file:gatsby-transformer-unified"
 
 gatsby-worker@^2.13.1:
