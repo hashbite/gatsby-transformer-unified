@@ -18,6 +18,8 @@ interface SharedUnifiedOptions {
     [key: string]: () => Promise<Processor>;
   };
   nodeTypes: [string, UnifiedGetSource][];
+  concurrencyLimit: number | null;
+  retryLimit: number;
 }
 
 export interface IUnifiedPluginOptions
@@ -26,4 +28,4 @@ export interface IUnifiedPluginOptions
 
 export interface UnifiedPluginOptions
   extends IPluginRefOptions,
-    SharedUnifiedOptions {}
+    Partial<SharedUnifiedOptions> {}

@@ -35,13 +35,15 @@ const ExampleContentfulPage: React.FC<ExampleContentfulPageProps> = (props) => {
             style={paragraphStyles}
             dangerouslySetInnerHTML={{
               __html:
-                props.data.contentfulText.longMarkdown.markdownToHtml.content,
+                props.data.contentfulText?.longMarkdown?.markdownToHtml?.content || "",
             }}
           />
           <p style={paragraphStyles}>Extracted data:</p>
           <pre>
             <code>
-              {props.data.contentfulText.longMarkdown.markdownToHtml.data}
+              {JSON.stringify(
+                props.data.contentfulText.longMarkdown.markdownToHtml.data
+              )}
             </code>
           </pre>
         </>

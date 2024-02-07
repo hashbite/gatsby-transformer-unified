@@ -34,12 +34,12 @@ const ExampleFileSystemPage: React.FC<ExampleFileSystemPageProps> = (props) => {
           <div
             style={paragraphStyles}
             dangerouslySetInnerHTML={{
-              __html: props.data.file.markdownToHtml.content,
+              __html: props.data.file.markdownToHtml?.content || "",
             }}
           />
           <p style={paragraphStyles}>Extracted data:</p>
           <pre>
-            <code>{props.data.file.markdownToHtml.data}</code>
+            <code>{JSON.stringify(props.data.file.markdownToHtml.data)}</code>
           </pre>
         </>
       )}

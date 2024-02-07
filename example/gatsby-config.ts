@@ -62,7 +62,7 @@ const config: GatsbyConfig = {
             (source) => source.internal.content,
           ],
         ],
-      } as Partial<UnifiedPluginOptions>,
+      } as UnifiedPluginOptions,
     },
   ],
 };
