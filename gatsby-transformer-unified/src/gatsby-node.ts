@@ -1,11 +1,11 @@
 import type { GatsbyNode, Node } from "gatsby";
 
 import { defaultPluginOptions } from "./config";
-import { UnifiedPluginOptions } from "./types";
+import { IUnifiedPluginOptions } from "./types";
 
 export const onPreInit: GatsbyNode["onPreInit"] = async (
   { reporter },
-  pluginOptions: UnifiedPluginOptions
+  pluginOptions: IUnifiedPluginOptions
 ) => {
   if (!pluginOptions.processors) {
     reporter.warn("No processors defined for gatsby-transformer-unified");
@@ -13,33 +13,35 @@ export const onPreInit: GatsbyNode["onPreInit"] = async (
   }
 };
 
-export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
-  ({ actions }, userPluginOptions: UnifiedPluginOptions) => {
-    const pluginOptions = {
-      ...defaultPluginOptions,
-      ...userPluginOptions,
-    };
-    const { createTypes } = actions;
-
-    // Dynamically add fields for each processor
-    const typeDefs = [`interface UnifiedTransformable @nodeInterface {`];
-    for (const key of Object.keys(pluginOptions.processors)) {
-      typeDefs.push(`  ${key}: String`);
-    }
-    typeDefs.push(`}`);
-
-    pluginOptions.nodeTypes.forEach(([nodeType]) => {
-      typeDefs.push(
-        `type ${nodeType} implements Node & UnifiedTransformable @dontInfer`
-      );
-    });
-
-    createTypes(typeDefs.join("\n"));
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = (
+  { actions },
+  userPluginOptions: IUnifiedPluginOptions
+) => {
+  const pluginOptions = {
+    ...defaultPluginOptions,
+    ...userPluginOptions,
   };
+  const { createTypes } = actions;
+
+  // Dynamically add fields for each processor
+  const typeDefs = [`interface UnifiedTransformable @nodeInterface {`];
+  for (const key of Object.keys(pluginOptions.processors)) {
+    typeDefs.push(`  ${key}: String`);
+  }
+  typeDefs.push(`}`);
+
+  pluginOptions.nodeTypes.forEach(([nodeType]) => {
+    typeDefs.push(
+      `type ${nodeType} implements Node & UnifiedTransformable @dontInfer`
+    );
+  });
+
+  createTypes(typeDefs.join("\n"));
+};
 
 export const createResolvers: GatsbyNode["createResolvers"] = async (
   { createResolvers, loadNodeContent },
-  userPluginOptions: UnifiedPluginOptions
+  userPluginOptions: IUnifiedPluginOptions
 ) => {
   const pluginOptions = {
     ...defaultPluginOptions,
