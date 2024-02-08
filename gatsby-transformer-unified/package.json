@@ -1,6 +1,6 @@
 {
   "name": "gatsby-transformer-unified",
-  "version": "0.0.1-canary.11",
+  "version": "0.0.1-canary.12",
   "description": "Gatsby v5 transformer for unified.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
