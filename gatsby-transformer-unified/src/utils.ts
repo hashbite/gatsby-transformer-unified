@@ -60,6 +60,7 @@ export class ConcurrencyControl<T> {
         // Retry the task if it fails and the retry limit has not been reached.
         if (attempt < this.retryLimit) {
           console.log(error);
+          await new Promise((resolve) => setTimeout(resolve, Math.random() * 500));
           console.log(`Retrying task, attempt ${attempt + 1}`);
           return await runTask(attempt + 1);
         } else {
